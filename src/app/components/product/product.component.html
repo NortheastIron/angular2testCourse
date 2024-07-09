@@ -1,0 +1,36 @@
+<div class="product-index" (click)="onClick()">
+    <div class="main-cont">
+        <div class="main-cont__image">
+            <img [src]="product.image">
+        </div>
+        <div class="main-cont__title">
+            <h2>{{ product.title }}</h2>
+        </div>
+        <div class="main-cont__price">
+            <span>{{ product.price | currency }}</span>
+        </div>
+    </div>
+    
+    <div *ngIf="isShowDetails" class="details-cont">
+    <!-- <div class="details-cont"> -->
+        <span class="details-cont__description">{{ product.description }}</span>
+        <span class="details-cont__rate">Rate: {{ product.rating.rate | number:"1.2-2" }}</span>
+    </div>
+</div>
+
+
+<!-- 
+<div *ngIf="isShowDetails" class="details-cont">
+    <span class="details-cont__description">{{ product.description }}</span>
+    <span class="details-cont__rate">Rate: {{ product.rating.rate }}</span>
+</div>
+OR
+<ng-template [ngIf]="isShowDetails">
+    <div class="details-cont">
+        <span class="details-cont__description">{{ product.description }}</span>
+        <span class="details-cont__rate">Rate: {{ product.rating.rate }}</span>
+    </div>
+</ng-template>
+
+
+ -->

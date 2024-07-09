@@ -1,3 +1,10 @@
 <div class="app-root">
-  <h1>{{ title }}</h1>
+  <div class="app-root__container">
+    <h1>{{ title }}</h1>
+  </div>
+
+  <product-index *ngFor="let product of products; let ind = index;" [product]="product"></product-index>
+
+  <!-- <product-index [product]="products[0]"></product-index>
+  <product-index [product]="products[1]"></product-index> -->
 </div>
