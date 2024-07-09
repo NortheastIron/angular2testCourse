@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TProduct } from './types';
@@ -16,14 +16,14 @@ export class ProductsDataProvider implements IProductsDataProvider {
     }
 
     public getAll(): Observable<TProduct[]> {
-        return this.http.get<TProduct[]>('https://fakestoreapi.com/products?limit=5');
-        // .subscribe({
-        //     next: (val) => {
-        //         console.log('val', val);
-        //     },
-        //     complete: () => {
-        //         console.log('complete');
-        //     }
-        // });
+        return this.http.get<TProduct[]>('https://fakestoreapi.com/products');
+    }
+
+    public list(size: number = 2000) {
+        return this.http.get<TProduct[]>('https://fakestoreapi.com/products', {
+            params: new HttpParams({
+                fromString: `limit=${size}`
+            })
+        });
     }
 }

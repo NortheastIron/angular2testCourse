@@ -24,11 +24,10 @@ export class AppComponent implements OnInit {
   private productDataProvider: any = null;
 
   constructor(private productsDataProvider: ProductsDataProvider) {
-    // this.productDataProvider = new ProductsDataProvider(this.http);
   }
 
   ngOnInit(): void {
-    this.productsDataProvider.getAll().subscribe({
+    this.productsDataProvider.list(5).subscribe({
       next: (value) => {
         this.products = value;
       },
