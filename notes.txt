@@ -1,0 +1,4 @@
+Проблема 1
+"strictPropertyInitialization": false, Лучше не использовать ибо может игнорировать потенциальные проблемы, лучше поставить !
+Например
+ protected products$!: Observable<TProduct[]>;

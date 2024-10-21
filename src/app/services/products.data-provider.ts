@@ -1,6 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, delay, throwError } from 'rxjs';
 import { TProduct } from './types';
 
 export interface IProductsDataProvider {
@@ -22,8 +22,17 @@ export class ProductsDataProvider implements IProductsDataProvider {
     public list(size: number = 2000) {
         return this.http.get<TProduct[]>('https://fakestoreapi.com/products', {
             params: new HttpParams({
-                fromString: `limit=${size}`
+                fromObject: {
+                    limit: size
+                }
             })
-        });
+        }).pipe(
+            delay(1000),
+            catchError(this.errorHandler)
+        );
+    }
+
+    private errorHandler(error: HttpErrorResponse) {
+        return throwError(() => error.message);
     }
 }

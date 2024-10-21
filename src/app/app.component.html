@@ -1,9 +1,22 @@
 <div class="app-root">
-  <div class="app-root__container">
+  <div class="app-root__title">
+    <!-- pipes -->
+    <!-- <h1>{{ title | titlecase }}</h1> -->
     <h1>{{ title }}</h1>
   </div>
 
-  <product-index *ngFor="let product of products; let ind = index;" [product]="product"></product-index>
+  <div *ngIf="loading" class="app-root__loading-box">
+    <span>Loading...</span>
+  </div>
+
+
+  <div class="app-root__products" [hidden]="loading">
+    <div *ngFor="let product of products$ | async; let ind = index;">
+      <product-index  [product]="product"></product-index>
+    </div>
+    
+  </div>
+  <!-- <product-index style="display:block;" [hidden]="loading" *ngFor="let product of products$ | async; let ind = index;" [product]="product"></product-index> -->
 
   <!-- <product-index [product]="products[0]"></product-index>
   <product-index [product]="products[1]"></product-index> -->
